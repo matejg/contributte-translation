@@ -55,6 +55,8 @@ class Translator extends Symfony\Component\Translation\Translator implements Net
 	/** @var array */
 	private $resourcesLocales = [];
 
+    /** @var string  */
+    private $initLang;
 
 	/**
 	 * @param Translette\Translation\LocaleResolver $localeResolver
@@ -71,8 +73,9 @@ class Translator extends Symfony\Component\Translation\Translator implements Net
 		$this->defaultLocale = $defaultLocale;
 		$this->cacheDir = $cacheDir;
 		$this->debug = $debug;
+        $this->initLang = str_replace( '~\\\\~', '');
 
-		parent::__construct('', null, $cacheDir, $debug);
+		parent::__construct($this->initLang, null, $cacheDir, $debug);
 		$this->setLocale(null);
 	}
 
@@ -179,7 +182,7 @@ class Translator extends Symfony\Component\Translation\Translator implements Net
 	 */
 	public function getLocale()
 	{
-		if (parent::getLocale() === null) {
+        if (parent::getLocale() === $this->initLang) {
 			$this->setLocale($this->localeResolver->resolve($this));
 		}
 
@@ -209,13 +212,13 @@ class Translator extends Symfony\Component\Translation\Translator implements Net
 	/**
 	 * {@inheritdoc}
 	 */
-	// public function translate($message, $count = null, $parameters = [], $domain = null, $locale = null)// @uncomment
-	public function translate($message, ...$parameters): string // @comment
+	public function translate($message, $count = null, $parameters = [], $domain = null, $locale = null)// @uncomment
+	//public function translate($message, ...$parameters): string // @comment
 	{
-		$count = array_key_exists(0, $parameters) ? $parameters[0] : null; // @comment
-		$parameters = array_key_exists(1, $parameters) ? $parameters[1] : []; // @comment
-		$domain = array_key_exists(2, $parameters) ? $parameters[2] : null; // @comment
-		$locale = array_key_exists(3, $parameters) ? $parameters[3] : null; // @comment
+		//$count = array_key_exists(0, $parameters) ? $parameters[0] : null; // @comment
+		//$parameters = array_key_exists(1, $parameters) ? $parameters[1] : []; // @comment
+		//$domain = array_key_exists(2, $parameters) ? $parameters[2] : null; // @comment
+		//$locale = array_key_exists(3, $parameters) ? $parameters[3] : null; // @comment
 
 		if (is_array($count)) {// back compatibility for ITranslator
 			$locale = $domain !== null ? (string) $domain : null;
