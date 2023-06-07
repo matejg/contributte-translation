@@ -232,13 +232,13 @@ class Translator extends Symfony\Component\Translation\Translator implements Net
 
 		$tmp = [];
 		foreach ($parameters as $k1 => $v1) {
-			//$tmp['%' . Nette\Utils\Strings::trim($k1, '%') . '%'] = $v1;// need this?
-			$tmp['%' . $k1 . '%'] = $v1;
+			$tmp['%' . Nette\Utils\Strings::trim($k1, '%') . '%'] = $v1;// need this?
+			//$tmp['%' . $k1 . '%'] = $v1;
 		}
 		$parameters = $tmp;
 
 		if (Nette\Utils\Validators::isNumericInt($count)) {
-			$parameters += ['%%count%%' => (int) $count];
+			$parameters += ['%count%' => (int) $count];
 		}
 
 		return $this->trans($message, $parameters, $domain, $locale);
