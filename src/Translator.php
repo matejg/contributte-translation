@@ -73,10 +73,9 @@ class Translator extends Symfony\Component\Translation\Translator implements Net
 		$this->defaultLocale = $defaultLocale;
 		$this->cacheDir = $cacheDir;
 		$this->debug = $debug;
-        $this->initLang = str_replace( '~\\\\~', '', self::class);
+        $this->initLang = preg_replace( '~\\\\~', '', self::class);
 
 		parent::__construct($this->initLang, null, $cacheDir, $debug);
-		$this->setLocale(null);
 	}
 
 
