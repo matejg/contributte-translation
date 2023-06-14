@@ -230,12 +230,12 @@ class Translator extends Symfony\Component\Translation\Translator implements Net
 			[$domain, $message] = Helpers::extractMessage($message);
 		}
 
-		$tmp = [];
-		foreach ($parameters as $k1 => $v1) {
+		//$tmp = [];
+		//foreach ($parameters as $k1 => $v1) {
 			//$tmp['%' . Nette\Utils\Strings::trim($k1, '%') . '%'] = $v1;// need this?
-			$tmp['%' . $k1 . '%'] = $v1;
-		}
-		$parameters = $tmp;
+			//$tmp['%' . $k1 . '%'] = $v1;
+		//}
+		//$parameters = $tmp;
 
 		if (Nette\Utils\Validators::isNumericInt($count)) {
 			$parameters += ['%count%' => (int) $count];
