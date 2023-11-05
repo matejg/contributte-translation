@@ -316,13 +316,13 @@ class Translator extends SymfonyTranslator implements ITranslator
 			[$domain, $message] = Helpers::extractMessage($message);
 		}
 
-		$tmp = [];
+	        $tmp = [];
 
 		foreach ($params as $k1 => $v1) {
 			$tmp['%' . $k1 . '%'] = $v1;
 		}
 
-		$params = $tmp;
+		// $params = $tmp;
 
 		if (Validators::isNumeric($count)) {
 			$params += ['%count%' => $count];
